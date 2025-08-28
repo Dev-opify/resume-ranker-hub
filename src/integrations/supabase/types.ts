@@ -14,7 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      candidates: {
+        Row: {
+          ats_score: number | null
+          class: Database["public"]["Enums"]["academic_class"]
+          created_at: string
+          github_link: string | null
+          id: string
+          linkedin_link: string | null
+          name: string
+          resume_url: string | null
+          semester: Database["public"]["Enums"]["semester"]
+          updated_at: string
+        }
+        Insert: {
+          ats_score?: number | null
+          class: Database["public"]["Enums"]["academic_class"]
+          created_at?: string
+          github_link?: string | null
+          id?: string
+          linkedin_link?: string | null
+          name: string
+          resume_url?: string | null
+          semester: Database["public"]["Enums"]["semester"]
+          updated_at?: string
+        }
+        Update: {
+          ats_score?: number | null
+          class?: Database["public"]["Enums"]["academic_class"]
+          created_at?: string
+          github_link?: string | null
+          id?: string
+          linkedin_link?: string | null
+          name?: string
+          resume_url?: string | null
+          semester?: Database["public"]["Enums"]["semester"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +61,13 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      academic_class:
+        | "freshman"
+        | "sophomore"
+        | "junior"
+        | "senior"
+        | "graduate"
+      semester: "fall" | "spring" | "summer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +194,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      academic_class: ["freshman", "sophomore", "junior", "senior", "graduate"],
+      semester: ["fall", "spring", "summer"],
+    },
   },
 } as const
