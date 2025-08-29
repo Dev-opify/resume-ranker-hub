@@ -90,7 +90,7 @@ const Register = () => {
       setUploadProgress(60);
 
       // Insert candidate data
-      const { error: insertError } = await supabase
+      const { data: candidateData, error: insertError } = await supabase
         .from("candidates")
         .insert({
           name: data.name,
@@ -99,9 +99,26 @@ const Register = () => {
           github_link: data.github_link || null,
           linkedin_link: data.linkedin_link || null,
           resume_url: resumeUrl,
-        });
+        })
+        .select()
+        .single();
 
       if (insertError) throw insertError;
+
+      setUploadProgress(80);
+
+      // Calculate ATS score using Gemini API in the background
+      try {
+        await supabase.functions.invoke('calculate-ats-score', {
+          body: { 
+            candidateId: candidateData.id, 
+            resumeUrl: resumeUrl 
+          }
+        });
+      } catch (atsError) {
+        console.error("ATS scoring failed (non-critical):", atsError);
+        // Don't fail the registration if ATS scoring fails
+      }
 
       setUploadProgress(100);
       setIsSuccess(true);
