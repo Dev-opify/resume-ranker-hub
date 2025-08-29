@@ -6,7 +6,7 @@ const Index = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16 fade-in">
           <h1 className="text-6xl font-bold text-foreground mb-6">
-            Welcome to <span className="gradient-primary bg-clip-text text-transparent">Resume Ranker</span>
+            Welcome to <span className="gradient-primary bg-clip-text text-transparent">Devopify</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Join our platform to submit your application and get instant ATS scoring. 
